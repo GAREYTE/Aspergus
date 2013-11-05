@@ -7,6 +7,9 @@ import javax.persistence.*;
 import org.openxava.annotations.*;
 
 @Entity
+@Views(value={@View(members="Client [name,prenom;"
+		+"adresse,codePostal,ville;"
+		+"telephone,email;]"+"commande")})
 public class Client {
 	
 	@Id
