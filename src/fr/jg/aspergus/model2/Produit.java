@@ -7,23 +7,23 @@ import javax.persistence.*;
 import org.openxava.annotations.*;
 
 @Entity
-public class Product {
+public class Produit {
 	
 	@Id @Column(length=9)
-	private int number;
+	private int numero;
 	
 	@Column(length=40) @Required
 	private String description;
 	
 	@Required
-	private BigDecimal unitPrice;
+	private BigDecimal prixUnitaire;
 
-	public int getNumber() {
-		return number;
+	public int getNumero() {
+		return numero;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
+	public void setNumero(int number) {
+		this.numero = number;
 	}
 
 	public String getDescription() {
@@ -34,12 +34,12 @@ public class Product {
 		this.description = description;
 	}
 
-	public BigDecimal getUnitPrice() {
-		return unitPrice;
+	public BigDecimal getPrixUnitaire() {
+		return prixUnitaire;
 	}
 
-	public void setUnitPrice(BigDecimal unitPrice) {
-		this.unitPrice = unitPrice;
+	public void setPrixUnitaire(BigDecimal unitPrice) {
+		this.prixUnitaire = unitPrice;
 	}
 
 }
