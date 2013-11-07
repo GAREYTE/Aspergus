@@ -7,8 +7,11 @@ import javax.persistence.*;
 import org.openxava.annotations.*;
 
 @Entity
-@Views(value={@View(members="Client [name,prenom;"
-		+"adresse,codePostal,ville;"
+@Views(
+		value={@View(members="Client [number,name,prenom;"
+				+"adresse;"
+				+"telephone,email;]"),@View(name="visu",members="Client [name,prenom;"
+		+"adresse;"
 		+"telephone,email;]"+"commande")})
 public class Client {
 	
@@ -20,12 +23,9 @@ public class Client {
 	private String name;
 	
 	private String prenom;
-	
-	private String adresse;
-	
-	private String codePostal;
-	
-	private String ville;
+	@Embedded
+	private Adresse adresse;
+
 	@Stereotype(value="TELEPHONE")
 	private String telephone;
 	@Stereotype(value="EMAIL")
@@ -66,29 +66,7 @@ public class Client {
 		this.prenom = prenom;
 	}
 
-	public String getAdresse() {
-		return adresse;
-	}
-
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
-	}
-
-	public String getCodePostal() {
-		return codePostal;
-	}
-
-	public void setCodePostal(String codePostal) {
-		this.codePostal = codePostal;
-	}
-
-	public String getVille() {
-		return ville;
-	}
-
-	public void setVille(String ville) {
-		this.ville = ville;
-	}
+	
 
 	public String getTelephone() {
 		return telephone;
@@ -104,6 +82,14 @@ public class Client {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
 	}
 
 
