@@ -12,7 +12,7 @@ public class AddData {
 	
 	public static void main(String[] args) {
 		Client cli = new Client();
-		cli.setName("LASSU");
+		cli.setNom("LASSU");
 		XPersistence.setDefaultSchema("default");
 		XPersistence.getManager().persist(cli);
 

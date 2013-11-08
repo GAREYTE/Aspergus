@@ -4,45 +4,66 @@ import java.math.*;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.xml.ws.soap.*;
 
 import org.openxava.annotations.*;
 import org.openxava.calculators.*;
 import org.openxava.model.*;
 
+import fr.jg.aspergus.calculator.*;
+
 @Entity
 @Views({
-	@View(members=" Entête [annee, numero, date, tva];" +
+	@View(members=" Entête [annee, numero, tva];" +
+		"Préparation [dateCommande,prisePar;datePreparation,preparePar;dateLivraison,livrePar;]"+
 		"client;" +
 		"details;" +
 		"remarque"
 	),
 	@View(name="WithSections", members=
-		"annee, numero, date, tva;" +
+		"annee, numero, dateCommande, tva;" +
 		"client { client }" +
 		"details { details }" +
 		"remarque { remarque } "			
 	)	
 })
-@Tab(properties="annee, numero, date, client.name, remarque")
+@Tab(properties="annee, numero, dateCommande, client.nom, remarque")
 public class Commande extends Identifiable {
 	
 	@DefaultValueCalculator(CurrentYearCalculator.class)
 	@Column(length=4) @Required
 	private int annee;
 	
-	
-	
 	@Column(length=6) @Required	
+	@DefaultValueCalculator(value=NextNumberCommandeCalculator.class,properties={@PropertyValue(name="annee")})
 	private Integer numero;
 	
 	@Required @DefaultValueCalculator(CurrentDateCalculator.class) 
-	private Date date;
+	private Date dateCommande;
+	
+	@DescriptionsList(descriptionProperties="nom")
+	@ManyToOne()
+	@Required
+	private Salarie prisePar;
+	
+	private Date datePreparation;
+	
+	@DescriptionsList(descriptionProperties="nom")
+	@ManyToOne()
+	private Salarie preparePar;
+	
+	private Date dateLivraison;
+	
+	@DescriptionsList(descriptionProperties="nom")
+	@ManyToOne()
+	private Salarie livrePar;
 	
 	@Column(length=2) @Required
 	@DefaultValueCalculator(value=IntegerCalculator.class, properties=@PropertyValue(name="value", value="18"))
 	private int tva;
 	
 	@ManyToOne(optional=false, fetch=FetchType.LAZY)
+	@DescriptionsList(descriptionProperties="nom,prenom")
 	private Client client;
 	
 	@OneToMany(mappedBy="commande", cascade=CascadeType.REMOVE)
@@ -85,20 +106,20 @@ public class Commande extends Identifiable {
 		this.annee = year;
 	}
 
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int number) {
+	public void setNumero(Integer number) {
 		this.numero = number;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getDateCommande() {
+		return dateCommande;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDateCommande(Date date) {
+		this.dateCommande = date;
 	}
 
 	public int getTva() {
@@ -131,6 +152,45 @@ public class Commande extends Identifiable {
 
 	public void setRemarque(String remarks) {
 		this.remarque = remarks;
+	}
+
+	public Date getDatePreparation() {
+		return datePreparation;
+	}
+
+	public void setDatePreparation(Date datePreparation) {
+		this.datePreparation = datePreparation;
+	}
+	public Salarie getPrisePar() {
+		return prisePar;
+	}
+
+	public void setPrisePar(Salarie prisePar) {
+		this.prisePar = prisePar;
+	}
+
+	public Salarie getPreparePar() {
+		return preparePar;
+	}
+
+	public void setPreparePar(Salarie preparePar) {
+		this.preparePar = preparePar;
+	}
+
+	public Date getDateLivraison() {
+		return dateLivraison;
+	}
+
+	public void setDateLivraison(Date dateLivraison) {
+		this.dateLivraison = dateLivraison;
+	}
+
+	public Salarie getLivrePar() {
+		return livrePar;
+	}
+
+	public void setLivrePar(Salarie livrePar) {
+		this.livrePar = livrePar;
 	}
 
 }

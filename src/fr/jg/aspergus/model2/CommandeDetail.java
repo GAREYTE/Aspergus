@@ -14,7 +14,6 @@ public class CommandeDetail extends Identifiable {
 	private Commande commande;
 	
 	@ManyToOne(optional=false, fetch=FetchType.LAZY)
-
 	private Produit produit;
 	
 	@Required

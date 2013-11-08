@@ -8,9 +8,7 @@ import org.openxava.annotations.*;
 
 @Entity
 @Views(
-		value={@View(members="Client [number,name,prenom;"
-				+"adresse;"
-				+"telephone,email;]"),@View(name="visu",members="Client [name,prenom;"
+		value={@View(members="Client [nom,prenom;"
 		+"adresse;"
 		+"telephone,email;]"+"commande")})
 public class Client {
@@ -20,7 +18,7 @@ public class Client {
 	
 	@Column(length=40) 
 	@SearchKey 
-	private String name;
+	private String nom;
 	
 	private String prenom;
 	@Embedded
@@ -50,12 +48,12 @@ public class Client {
 		this.number = number;
 	}
 
-	public String getName() {
-		return name;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNom(String name) {
+		this.nom = name;
 	}
 
 	public String getPrenom() {
@@ -91,7 +89,11 @@ public class Client {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return getNom()+ " "+getPrenom();
+	}
 
 	
 }

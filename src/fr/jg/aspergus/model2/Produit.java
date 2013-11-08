@@ -16,6 +16,12 @@ public class Produit {
 	private String description;
 	
 	@Required
+	@DescriptionsList(descriptionProperties="nom")
+	@ManyToOne(optional=false, fetch=FetchType.LAZY)
+	private Categorie categorie;
+	
+	@Required
+	@Stereotype(value="MONEY")
 	private BigDecimal prixUnitaire;
 
 	public int getNumero() {
@@ -40,6 +46,14 @@ public class Produit {
 
 	public void setPrixUnitaire(BigDecimal unitPrice) {
 		this.prixUnitaire = unitPrice;
+	}
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 
 }
