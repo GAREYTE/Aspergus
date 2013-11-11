@@ -6,10 +6,13 @@ import javax.persistence.*;
 
 import org.openxava.annotations.*;
 
+import fr.jg.aspergus.calculator.*;
+
 @Entity
 public class Produit {
 	
 	@Id @Column(length=9)
+	@DefaultValueCalculator(value=NextNumberCalculator.class,properties={@PropertyValue(name="table",value="Produit")})
 	private int numero;
 	
 	@Column(length=40) @Required

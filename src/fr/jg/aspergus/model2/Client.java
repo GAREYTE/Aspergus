@@ -6,15 +6,18 @@ import javax.persistence.*;
 
 import org.openxava.annotations.*;
 
+import fr.jg.aspergus.calculator.*;
+
 @Entity
 @Views(
-		value={@View(members="Client [nom,prenom;"
+		value={@View(members="Client [numero,nom,prenom;"
 		+"adresse;"
 		+"telephone,email;]"+"commande")})
 public class Client {
 	
 	@Id
-	private int number;
+	@DefaultValueCalculator(value=NextNumberCalculator.class,properties={@PropertyValue(name="table",value="Client")})
+	private int numero;
 	
 	@Column(length=40) 
 	@SearchKey 
@@ -40,12 +43,12 @@ public class Client {
 		this.commande = commande;
 	}
 
-	public int getNumber() {
-		return number;
+	public int getNumero() {
+		return numero;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
+	public void setNumero(int number) {
+		this.numero = number;
 	}
 
 	public String getNom() {

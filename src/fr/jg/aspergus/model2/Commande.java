@@ -67,7 +67,7 @@ public class Commande extends Identifiable {
 	private Client client;
 	
 	@OneToMany(mappedBy="commande", cascade=CascadeType.REMOVE)
-	@ListProperties("produit.numero, produit.description, produit.prixUnitaire, quantite, amount[commande.sum, commande.vat, commande.total]")
+	@ListProperties("produit.description, produit.prixUnitaire, quantite, amount[commande.sum, commande.vat, commande.total]")
 	private Collection<CommandeDetail> details;
 	
 	@Stereotype("TEXT_AREA")

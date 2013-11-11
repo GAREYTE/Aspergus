@@ -4,11 +4,14 @@ import javax.persistence.*;
 
 import org.openxava.annotations.*;
 
+import fr.jg.aspergus.calculator.*;
+
 @Entity
 public class Salarie {
 
 	@Id
 	@Required
+	@DefaultValueCalculator(value=NextNumberCalculator.class,properties={@PropertyValue(name="table",value="Salarie")})
 	private Integer numero;
 	@Required
 	private String nom;
