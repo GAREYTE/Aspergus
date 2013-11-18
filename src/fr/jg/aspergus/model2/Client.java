@@ -17,10 +17,11 @@ public class Client {
 	
 	@Id
 	@DefaultValueCalculator(value=NextNumberCalculator.class,properties={@PropertyValue(name="table",value="Client")})
+	@ReadOnly
 	private int numero;
 	
 	@Column(length=40) 
-	@SearchKey 
+	@SearchKey  
 	private String nom;
 	
 	private String prenom;

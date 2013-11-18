@@ -27,7 +27,7 @@ import fr.jg.aspergus.calculator.*;
 		"remarque { remarque } "			
 	)	
 })
-@Tab(properties="annee, numero, dateCommande, client.nom, remarque")
+@Tab(properties="annee, numero, dateCommande,dateLivraison, client.nom, remarque")
 public class Commande extends Identifiable {
 	
 	@DefaultValueCalculator(CurrentYearCalculator.class)
@@ -35,6 +35,7 @@ public class Commande extends Identifiable {
 	private int annee;
 	
 	@Column(length=6) @Required	
+	@ReadOnly()
 	@DefaultValueCalculator(value=NextNumberCommandeCalculator.class,properties={@PropertyValue(name="annee")})
 	private Integer numero;
 	

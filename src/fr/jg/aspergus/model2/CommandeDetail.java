@@ -14,6 +14,7 @@ public class CommandeDetail extends Identifiable {
 	private Commande commande;
 	
 	@ManyToOne(optional=false, fetch=FetchType.LAZY)
+	@DescriptionsList(descriptionProperties="categorie.nom,description")
 	private Produit produit;
 	
 	@Required

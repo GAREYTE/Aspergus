@@ -12,6 +12,7 @@ import fr.jg.aspergus.calculator.*;
 public class Produit {
 	
 	@Id @Column(length=9)
+	@ReadOnly
 	@DefaultValueCalculator(value=NextNumberCalculator.class,properties={@PropertyValue(name="table",value="Produit")})
 	private int numero;
 	
