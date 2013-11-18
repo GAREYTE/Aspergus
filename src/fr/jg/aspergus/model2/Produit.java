@@ -9,6 +9,7 @@ import org.openxava.annotations.*;
 import fr.jg.aspergus.calculator.*;
 
 @Entity
+@Tab(properties="categorie.nom,description,prixUnitaire")
 public class Produit {
 	
 	@Id @Column(length=9)
